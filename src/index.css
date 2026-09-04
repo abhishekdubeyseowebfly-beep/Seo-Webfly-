@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Manrope', sans-serif;
+    background-color: #0A0A0B;
+    color: #E2E8F0;
+  }
+  
+  h1, h2, h3, h4, h5, h6, .font-space {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Custom Sophisticated Dark Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0A0B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #222433;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #34a29d;
+  }
+}
+
+@keyframes dash {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.velocity-gradient {
+  background: linear-gradient(135deg, #0f2c2b 0%, #006a66 50%, #12131A 100%);
+}
+
+.velocity-gradient-text {
+  background: linear-gradient(135deg, #34a29d 0%, #70d7d1 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F59E0B 0%, #D4AF37 50%, #FBBF24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cyber-glow-text {
+  background: linear-gradient(135deg, #70d7d1 0%, #38bdf8 50%, #34a29d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.obsidian-card {
+  background-color: #12131A;
+  border: 1px solid #1E202D;
+}
+
+.obsidian-card:hover {
+  border-color: #34a29d;
+  box-shadow: 0 10px 30px -10px rgba(52, 162, 157, 0.15);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.font-variation-fill {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+

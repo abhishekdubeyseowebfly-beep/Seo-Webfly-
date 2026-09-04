@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "role": { "type": "string", "enum": ["client", "admin"], "description": "User role" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Profile creation timestamp" }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "Consultation": {
+      "title": "Consultation",
+      "description": "Consultation request or booking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Consultation document ID" },
+        "fullName": { "type": "string", "maxLength": 100, "description": "Client full name" },
+        "email": { "type": "string", "maxLength": 100, "description": "Client work email" },
+        "phone": { "type": "string", "maxLength": 30, "description": "Client phone number" },
+        "companyName": { "type": "string", "maxLength": 100, "description": "Company or brand name" },
+        "websiteUrl": { "type": "string", "maxLength": 200, "description": "Website URL" },
+        "industry": { "type": "string", "maxLength": 100, "description": "Industry vertical" },
+        "monthlyTraffic": { "type": "string", "maxLength": 50, "description": "Monthly traffic range" },
+        "budgetRange": { "type": "string", "maxLength": 50, "description": "Monthly budget range" },
+        "targetTimeline": { "type": "string", "maxLength": 50, "description": "Project start timeline" },
+        "selectedObjectives": { "type": "array", "description": "Selected service objectives" },
+        "wantFreeAiAudit": { "type": "boolean", "description": "Whether AI audit is requested" },
+        "preferredDate": { "type": "string", "maxLength": 20, "description": "Preferred session date" },
+        "preferredTime": { "type": "string", "maxLength": 50, "description": "Preferred time slot" },
+        "projectNotes": { "type": "string", "maxLength": 1000, "description": "Project notes" },
+        "status": { "type": "string", "enum": ["pending", "reviewed", "scheduled", "completed"], "description": "Status of consultation" },
+        "userId": { "type": "string", "description": "UID of submitting user if signed in" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Submission timestamp" }
+      },
+      "required": ["fullName", "email", "phone", "companyName", "websiteUrl", "status", "createdAt"]
+    },
+    "Audit": {
+      "title": "Audit",
+      "description": "Instant Gemini AI website audit report",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Audit document ID" },
+        "url": { "type": "string", "maxLength": 200, "description": "Scanned website URL" },
+        "overallScore": { "type": "number", "description": "Overall score" },
+        "seoScore": { "type": "number", "description": "SEO score" },
+        "performanceScore": { "type": "number", "description": "Speed score" },
+        "aiReadinessScore": { "type": "number", "description": "AI readiness score" },
+        "projectedRevenueIncrease": { "type": "string", "maxLength": 50, "description": "Revenue potential" },
+        "quickWins": { "type": "array", "description": "Quick wins list" },
+        "technicalIssues": { "type": "array", "description": "Technical bottlenecks" },
+        "summary": { "type": "string", "maxLength": 1000, "description": "Executive summary" },
+        "userId": { "type": "string", "description": "UID of user who performed scan" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Audit creation timestamp" }
+      },
+      "required": ["url", "overallScore", "seoScore", "performanceScore", "aiReadinessScore", "createdAt"]
+    },
+    "RoiScenario": {
+      "title": "RoiScenario",
+      "description": "Saved ROI projection calculation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Scenario ID" },
+        "monthlyTraffic": { "type": "number", "description": "Current monthly traffic" },
+        "conversionRate": { "type": "number", "description": "Conversion rate percentage" },
+        "averageOrderValue": { "type": "number", "description": "AOV value" },
+        "projectedTrafficGrowth": { "type": "number", "description": "Growth multiplier" },
+        "calculatedMonthlyRevenue": { "type": "number", "description": "Calculated current revenue" },
+        "calculatedProjectedRevenue": { "type": "number", "description": "Calculated projected revenue" },
+        "calculatedRevenueLift": { "type": "number", "description": "Calculated revenue lift" },
+        "userId": { "type": "string", "description": "UID of user who calculated" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp" }
+      },
+      "required": ["monthlyTraffic", "conversionRate", "averageOrderValue", "calculatedRevenueLift", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile documents"
+    },
+    "/consultations/{consultationId}": {
+      "schema": { "$ref": "#/entities/Consultation" },
+      "description": "Submitted client consultation and proposal requests"
+    },
+    "/audits/{auditId}": {
+      "schema": { "$ref": "#/entities/Audit" },
+      "description": "Saved AI website audit reports"
+    },
+    "/roi_scenarios/{scenarioId}": {
+      "schema": { "$ref": "#/entities/RoiScenario" },
+      "description": "Saved ROI projections"
+    }
+  }
+}
